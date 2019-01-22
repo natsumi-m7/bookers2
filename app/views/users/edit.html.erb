@@ -1,0 +1,22 @@
+
+<h1>User info</h1>
+
+<div class="new-book">
+		<%= form_for(@user) do |f| %>
+		<% if @user.errors.any? %>
+        <%= @user.errors.count %>件のエラーが発生しました
+        <% @user.errors.full_messages.each do |message| %>
+            <%= message %>
+        <% end %>
+    <% end %>
+		 
+		    <h5>Name</h5>
+		    <%= f.text_field :username ,class: "name"%>
+		 	<h5>Image</h5>
+		 	 <%= attachment_image_tag @user, :profile_image %>
+		 	 <%= f.attachment_field :profile_image,class: "user_image" %>
+		 	<h5>Introduction</h5>
+		 	<%= f.text_area :introduction,class: "introduction" %>
+		 	<%= f.submit 'Update User' %>
+		<% end %>
+</div>

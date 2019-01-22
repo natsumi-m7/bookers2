@@ -1,0 +1,24 @@
+<% if @book.errors.any? %>
+   	<p>タイトルは必ず記入、感想は２００文字以で入力してください。</p>
+<% end %>
+
+<div class="edit-book">
+	<h1>Editing Book</h1>
+			<%= form_for(@book) do |f| %>
+			<% if @book.errors.any? %>
+	        <%= @book.errors.count %>件のエラーが発生しました
+	        <% @book.errors.full_messages.each do |message| %>
+	            <%= message %>
+	        <% end %>
+	    <% end %>
+			 
+			    <h5>Title</h5>
+			    <%= f.text_field :title,class: "book_title",size: "20x10", class: "form-control"  %>
+			 
+			    <h5>Opinion</h5>
+			    <%= f.text_area :body,class: "book_body",size: "20x2", class: "form-control"  %>
+			 	<div class = "submit-btn" >
+			    	<%= f.submit 'Update Book',class: 'btn btn-primary btn-block' %>
+			<% end %>
+			<%=link_to "Show",book_path(@book.id),class: "book_#{@book.id}" %>|<%=link_to "Back",books_path,class: "back" %>
+</div>

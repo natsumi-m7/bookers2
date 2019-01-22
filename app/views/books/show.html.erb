@@ -1,0 +1,25 @@
+
+
+<div class="row">
+	<div class="col-lg-4" >
+		<%= render 'users/side', user:@user, book:@book %>
+	</div>
+	<div class="col-lg-8">
+		<h1>Book detail</h1>
+		<table class="table table-striped">
+
+				<tr>
+					<td><%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
+						<div><%= link_to @user.name,user_path(@user.id),class: "user_#{@user.id}" %></div>
+					</td>
+		    		<td><%= @books.title %></td>
+		    		<td><%= @books.body %></td>
+		    		<% if @books.user == current_user %>
+		    		<td><%=link_to "Edit",edit_book_path(@books.id),class: "edit_book_#{@books.id}"%></td>
+		    		<td><%=link_to "Destroy",destroy_book_path(@books.id),method: :delete,"data-confirm" => "本当に削除しますか？",class: "destroy_book_#{@books.id}" %></td>
+		    		<% end %>
+		  		</tr>
+		</table>
+
+	</div>
+</div>
