@@ -13,9 +13,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    if @user
-    else redirect_to show_path(current_user)
-    end
+
   end
 
 
@@ -37,8 +35,13 @@ class UsersController < ApplicationController
 
   def update
   	@user = User.find(params[:id])
-  	@user.update(user_params)
-  	redirect_to user_path(@user.id)
+  	if @user.update(user_params)
+      flash[:notice] = "Update user successfully!!"
+  	   redirect_to user_path(@user.id)
+      
+    else
+       render 'edit'
+    end
 
   end
 
@@ -59,7 +62,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-  	params.require(:user).permit(:name, :profile_image, :introduction)
+  	params.require(:user).permit(:name, :profile_image, :introduction,:username)
   end
 
   def book_params
